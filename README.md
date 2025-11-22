@@ -1,4 +1,7 @@
-<img src="resources/Elgohary-Music app icon.png" alt="Elgohary Music Icon" width="140"/>
+<img src="resources/Elgohary-Music app icon.png"
+     alt="Elgohary Music Icon"
+     width="140"
+     style="border-radius: 28px;" />
 
 # **<span style="font-size:2em;">Elgohary Music</span>**
 
