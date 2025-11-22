@@ -1,5 +1,5 @@
 <img src="resources/Elgohary-Music app icon.png" alt="Product Detail" width="140"/>
-# **Elgohary Music**
+# Elgohary Music
 
 **Elgohary Music** is a modern, smooth, and highly customizable offline
 music player for Android, inspired by Samsung Music and built with
