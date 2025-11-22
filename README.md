@@ -47,7 +47,8 @@ Elgohary Music properly handles all required storage/audio permissions.
 
 #### Android 13+
 
-- READ_MEDIA_AUDIO  
+- READ_MEDIA_AUDIO
+- READ_MEDIA_IMAGES
 - File changes through SAF
 
 #### Android 10--12
