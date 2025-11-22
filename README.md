@@ -1,7 +1,7 @@
 ```{=html}
 <p align="center">
 ```
-`<img src="/mnt/data/Elgohary-Music app icon.png" width="140" />`{=html}
+` <img src="https://raw.githubusercontent.com/ahmedelgohary305/Elgohary-Music/master/resources/Elgohary-Music app icon.png" width="140"/>`{=html}
 ```{=html}
 </p>
 ```
