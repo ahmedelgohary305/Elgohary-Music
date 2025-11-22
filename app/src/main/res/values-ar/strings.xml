@@ -1,0 +1,214 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Elgohary Music</string>
+    <string name="just_now">الآن</string>
+    <string name="minutes_ago">قبل %1$d دقيقة</string>
+    <string name="hours_ago">قبل %1$d ساعة</string>
+    <string name="days_ago">قبل %1$d يوم</string>
+    <string name="weeks_ago">قبل %1$d أسبوع</string>
+    <string name="months_ago">قبل %1$d شهر</string>
+    <string name="years_ago">قبل %1$d سنة</string>
+
+    <string name="song_title">اسم الاغنية</string>
+    <string name="artist">الفنان</string>
+    <string name="album_optional">الألبوم (اختياري)</string>
+    <string name="save">حفظ</string>
+
+    <string name="created_today">تم إنشاؤها اليوم</string>
+    <string name="created_yesterday">تم إنشاؤها أمس</string>
+    <string name="created_days_ago">تم إنشاؤها قبل %1$d يوم</string>
+    <string name="created_weeks_ago">تم إنشاؤها قبل %1$d أسبوع</string>
+    <string name="created_months_ago">تم إنشاؤها قبل %1$d شهر</string>
+    <string name="created_date">تم إنشاؤها في %1$s</string>
+
+    <string name="one_song">أغنية واحدة</string>
+    <string name="multiple_songs">%1$s أغنية</string>
+
+    <string name="add_to_queue">أضف إلى القائمة</string>
+    <string name="edit_song">تعديل الأغنية</string>
+    <string name="remove_from_playlist">ازالة من قائمة التشغيل</string>
+    <string name="delete_playlist">ازالة قائمة التشغيل</string>
+    <string name="add_songs">إضافة أغاني</string>
+    <string name="edit_playlist">تعديل قائمة التشغيل</string>
+
+    <string name="sort_by_name">الاسم</string>
+    <string name="sort_by_artist">الفنان</string>
+    <string name="sort_by_duration">المدة</string>
+
+    <string name="playing_now">يتم التشغيل الآن</string>
+    <string name="played_minutes_ago">تم التشغيل قبل %1$d دقيقة</string>
+    <string name="played_hours_ago">تم التشغيل قبل %1$d ساعة</string>
+    <string name="played_days_ago">تم التشغيل قبل %1$d يوم</string>
+    <string name="played_date">تم التشغيل في %1$s</string>
+
+    <string name="duration_days_hours_minutes">%1$dي %2$dس %3$dد</string>
+    <string name="duration_days_minutes">%1$dي %2$dد</string>
+    <string name="duration_hours_minutes">%1$dس %2$dد</string>
+    <string name="duration_minutes_seconds">%1$dد %2$dث</string>
+    <string name="duration_seconds">%1$dث</string>
+
+    <string name="playlists">قوائم التشغيل</string>
+    <string name="favorites">المفضلة</string>
+    <string name="your_music">موسيقاك</string>
+    <string name="albums">الألبومات</string>
+    <string name="artists">الفنانون</string>
+    <string name="music">الموسيقى</string>
+
+    <string name="one_song_in_library">أغنية واحدة في مكتبتك</string>
+    <string name="songs_in_library">%1$s أغنية في مكتبتك</string>
+    <string name="curated_playlists">"قوائم التشغيل المنسقة</string>
+    <string name="favorite_tracks">أغانيك المفضلة</string>
+    <string name="album_collection">مجموعة الألبومات</string>
+    <string name="artist_library">مكتبة الفنانين</string>
+    <string name="discover_your_music">اكتشف موسيقاك</string>
+
+    <string name="now_playing">يتم تشغيل الآن</string>
+    <string name="clear_all">مسح الكل</string>
+
+    <plurals name="queue_songs" tools:ignore="MissingQuantity">
+        <item quantity="one">قائمة التشغيل (أغنية واحدة)</item>
+        <item quantity="other">قائمة التشغيل (%d أغنية)</item>
+    </plurals>
+
+    <string name="exit_selection">الخروج من التحديد</string>
+    <string name="select_all">تحديد الكل</string>
+    <plurals name="selected_items" tools:ignore="MissingQuantity">
+        <item quantity="one">تم تحديد عنصر واحد</item>
+        <item quantity="other">تم تحديد %d عناصر</item>
+    </plurals>
+
+    <!-- Action labels -->
+    <string name="action_play">تشغيل</string>
+    <string name="action_favorite">إضافة إلى المفضلة</string>
+    <string name="action_unfavorite">إزالة من المفضلة</string>
+    <string name="action_queue">قائمة الانتظار</string>
+    <string name="action_playlist">قائمة التشغيل</string>
+
+    <!-- Toast messages -->
+    <plurals name="added_to_favorites" tools:ignore="MissingQuantity">
+        <item quantity="one">تمت إضافة أغنية واحدة إلى المفضلة</item>
+        <item quantity="other">تمت إضافة %d أغاني إلى المفضلة</item>
+    </plurals>
+
+    <plurals name="removed_from_favorites" tools:ignore="MissingQuantity">
+        <item quantity="one">تمت إزالة أغنية واحدة من المفضلة</item>
+        <item quantity="other">تمت إزالة %d أغاني من المفضلة</item>
+    </plurals>
+
+    <string name="all_songs_already_in_favorites">كل الأغاني موجودة بالفعل في المفضلة</string>
+
+    <!-- Dialog title and subtitle -->
+    <string name="create_new_playlist">إنشاء قائمة تشغيل جديدة</string>
+    <string name="playlist_creation_subtitle">امنح قائمتك اسمًا وابدأ في تنظيم أغانيك</string>
+
+    <!-- Field labels -->
+    <string name="playlist_name_label">اسم قائمة التشغيل</string>
+    <string name="playlist_description_label">الوصف (اختياري)</string>
+
+    <!-- Selected songs section -->
+    <plurals name="songs_selected" tools:ignore="MissingQuantity">
+        <item quantity="one">تم اختيار أغنية واحدة</item>
+        <item quantity="other">تم اختيار %d أغاني</item>
+    </plurals>
+    <string name="ready_to_create_playlist">جاهز لإنشاء قائمة التشغيل</string>
+
+    <!-- Buttons -->
+    <string name="cancel">إلغاء</string>
+    <string name="edit_songs">تعديل الأغاني</string>
+
+    <plurals name="create_playlist_with_songs" tools:ignore="MissingQuantity">
+        <item quantity="one">إنشاء قائمة تشغيل تحتوي على أغنية واحدة</item>
+        <item quantity="other">إنشاء قائمة تشغيل تحتوي على %d أغاني</item>
+    </plurals>
+    <string name="create_empty_playlist">إنشاء قائمة تشغيل فارغة</string>
+
+
+
+    <string name="queue_title">قائمة التشغيل</string>
+
+    <string name="settings">الاعدادات</string>
+    <string name="language">اللغة</string>
+    <string name="language_name">العربية</string>
+    <string name="theme">المظهر</string>
+    <string name="dark_mode">الوضع الداكن</string>
+    <string name="light_mode">الوضع الفاتح</string>
+
+    <string name="create_playlist">إنشاء قائمة تشغيل</string>
+
+    <string name="to_playlist">إلى "%1$s"</string>
+    <string name="choose_songs_and_enter_details">اختر الأغاني وأدخل التفاصيل</string>
+    <string name="update_playlist_info">تحديث معلومات قائمة التشغيل</string>
+
+    <string name="search_songs">ابحث عن الأغاني...</string>
+    <string name="close_search">إغلاق البحث</string>
+    <string name="search_songs_cd">بحث عن الأغاني</string>
+
+    <string name="no_results_for">لا توجد نتائج لـ "%1$s"</string>
+    <string name="results_for">%1$d نتيجة لـ "%2$s"</string>
+    <string name="no_results_found">لا توجد نتائج</string>
+    <string name="try_different_search">جرّب مصطلح بحث مختلف</string>
+
+    <string name="selected_songs_count">%1$d تم تحديدها</string>
+
+    <string name="create_playlist_action">إنشاء قائمة تشغيل</string>
+    <string name="create_playlist_action_count">إنشاء قائمة تشغيل (%1$d)</string>
+    <string name="add_songs_action">إضافة أغاني</string>
+    <string name="add_songs_action_count">إضافة أغاني (%1$d)</string>
+    <string name="save_changes">حفظ التغييرات</string>
+    <string name="no_music_found">لا يوجد اغاني</string>
+    <string name="add_some_music_to_get_started">اضف اغاني وابدأ الآن</string>
+    <string name="no_artists_found">لا يوجد فنانون</string>
+    <string name="add_some_music_to_your_device_to_see_artists">اضف اغاني الي جهازك لتري الفنانين</string>
+    <string name="no_albums_found">لا يوجد البومات</string>
+    <string name="try_adding_some_music_to_your_device">اضف اغاني الي جهازك لتري الالبومات</string>
+    <string name="no_favorites_yet">لا يوجد اغاني في المفضلة بعد</string>
+    <string name="heart_songs_to_add_them_to_your_favorites">اضغط علي القلب للاضافة الي المفضلة</string>
+    <string name="this_action_cannot_be_undone">لا يمكن الرجوع عن هذا القرار</string>
+    <string name="song_by_artist">«%1$s» بواسطة %2$s</string>
+
+    <string name="delete">حذف</string>
+    <string name="delete_all">حذف الكل</string>
+
+    <string name="song_deleted_success">تم حذف الأغنية بنجاح</string>
+    <string name="songs_deleted_success">تم حذف %1$d أغنية بنجاح</string>
+
+    <string name="permission_denied">تم رفض الإذن. يرجى التحقق من إعدادات التطبيق.</string>
+
+    <string name="no_playlists_yet">لا توجد قوائم تشغيل بعد</string>
+    <string name="create_first_playlist">أنشئ أول قائمة تشغيل لتنظيم موسيقاك</string>
+
+    <string name="delete_playlist_title">حذف قائمة التشغيل؟</string>
+    <string name="delete_playlist_message">هل أنت متأكد أنك تريد حذف هذه القائمة؟ لا يمكن التراجع عن هذا الإجراء.</string>
+
+    <string name="failed_to_delete_song">فشل في حذف الأغنية: %1$s</string>
+    <string name="failed_to_update_song">فشل في تعديل الأغنية: %1$s</string>
+    <string name="failed_to_delete_songs">فشل في حذف الأغاني: %1$s</string>
+
+    <string name="search_queue">ابحث في قائمة التشغيل...</string>
+    <string name="no_songs_found">لم يتم العثور على أي أغاني</string>
+    <string name="queue_empty">قائمة التشغيل فارغة</string>
+    <string name="try_searching_different_keywords">جرّب البحث بكلمات مختلفة</string>
+
+
+    <plurals name="album_count" tools:ignore="MissingQuantity">
+        <item quantity="one">%d ألبوم</item>
+        <item quantity="few">%d ألبومات</item>
+        <item quantity="many">%d ألبوم</item>
+        <item quantity="other">%d ألبوم</item>
+    </plurals>
+
+    <plurals name="are_you_sure_you_want_to_delete_this_song" tools:ignore="MissingQuantity">
+        <item quantity="one">هل انت متأكد من ازالة هذه الأغنية المحددة</item>
+        <item quantity="other">هل انت متأكد من ازالة %1$d أغنية محددة</item>
+    </plurals>
+
+    <plurals name="delete_song_dialog" tools:ignore="MissingQuantity">
+        <item quantity="one">حذف الاغنية؟</item>
+        <item quantity="other">حذف %1$d اغاني</item>
+    </plurals>
+
+
+    <plurals name="song_count" tools:ignore="MissingQuantity">
+        <item quantity="one">%1$d أغنية</item>
+        <item quantity="other">%1$d أغاني</item>
+    </plurals>
+</resources>
