@@ -1,8 +1,15 @@
-# 🎵 **Elgohary Music**
+```{=html}
+<p align="center">
+```
+`<img src="/mnt/data/Elgohary-Music app icon.png" width="140" />`{=html}
+```{=html}
+</p>
+```
+# **Elgohary Music**
 
 **Elgohary Music** is a modern, smooth, and highly customizable offline
-music player for Android, inspired by **Samsung Music**, built with
-**Jetpack Compose**, **Media3**, and **MVVM** architecture.
+music player for Android, inspired by Samsung Music and built with
+Jetpack Compose, Media3, and MVVM architecture.
 
 ------------------------------------------------------------------------
 
@@ -10,8 +17,8 @@ music player for Android, inspired by **Samsung Music**, built with
 
 ### 🎧 Music Playback
 
--   High-quality playback using **Media3 + ExoPlayer**
--   Background audio with notification & lock-screen controls
+-   High-quality playback using Media3 + ExoPlayer
+-   Background audio with notification & lock‑screen controls
 -   Waveform progress bar visualization
 -   Queue tools (add to queue, play next, remove, clear)
 -   Drag & drop queue reordering
@@ -31,7 +38,7 @@ music player for Android, inspired by **Samsung Music**, built with
 
 -   Edit audio metadata (title, artist, album)
 -   Delete song from storage
--   Metadata editing using **jaudiotagger**
+-   Metadata editing using jaudiotagger
 -   Auto refresh after edits
 
 ### 📋 Playlist System
@@ -45,20 +52,21 @@ music player for Android, inspired by **Samsung Music**, built with
 
 Elgohary Music properly handles all required storage/audio permissions.
 
-#### **Android 13+**
+#### Android 13+
 
--   `READ_MEDIA_AUDIO`
+-   READ_MEDIA_AUDIO
+-   READ_MEDIA_IMAGES
 -   File changes through SAF
 
-#### **Android 10--12**
+#### Android 10--12
 
--   `READ_EXTERNAL_STORAGE`
+-   READ_EXTERNAL_STORAGE
 -   Writes via MediaStore
 
-#### **Android 9 and below**
+#### Android 9 and below
 
--   `READ_EXTERNAL_STORAGE`
--   `WRITE_EXTERNAL_STORAGE`
+-   READ_EXTERNAL_STORAGE
+-   WRITE_EXTERNAL_STORAGE
 
 ### 🌐 Localization & Themes
 
@@ -78,15 +86,15 @@ Elgohary Music properly handles all required storage/audio permissions.
 
 ## 🛠 Tech Stack
 
--   Kotlin
--   Jetpack Compose
--   Media3 / ExoPlayer
--   Room Database
--   DataStore Preferences
--   Hilt (DI)
--   jaudiotagger
--   Coil
--   Accompanist Permissions
+-   Kotlin\
+-   Jetpack Compose\
+-   Media3 / ExoPlayer\
+-   Room Database\
+-   DataStore Preferences\
+-   Hilt (DI)\
+-   jaudiotagger\
+-   Coil\
+-   Accompanist Permissions\
 -   Reorderable lists library
 
 ------------------------------------------------------------------------
@@ -107,3 +115,9 @@ Elgohary Music properly handles all required storage/audio permissions.
 -   Folder-based browsing\
 -   Lyrics display\
 -   Cloud playlist backup
+
+------------------------------------------------------------------------
+
+## 📄 License
+
+Add your preferred license here.
