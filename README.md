@@ -1,46 +1,45 @@
-<img src="resources/Elgohary-Music app icon.png" alt="Product Detail" width="140"/>
-# Elgohary Music
+<img src="resources/Elgohary-Music app icon.png" alt="Elgohary Music Icon" width="140"/>
 
-**Elgohary Music** is a modern, smooth, and highly customizable offline
-music player for Android, inspired by Samsung Music and built with
-Jetpack Compose, Media3, and MVVM architecture.
+# **<span style="font-size:2em;">Elgohary Music</span>**
 
-------------------------------------------------------------------------
+**Elgohary Music** is a modern, smooth, and highly customizable offline music player for Android, inspired by Samsung Music and built with Jetpack Compose, Media3, and MVVM architecture.
+
+---
 
 ## ✨ Features
 
 ### 🎧 Music Playback
 
--   High-quality playback using Media3 + ExoPlayer
--   Background audio with notification & lock‑screen controls
--   Waveform progress bar visualization
--   Queue tools (add to queue, play next, remove, clear)
--   Drag & drop queue reordering
+- High-quality playback using Media3 + ExoPlayer
+- Background audio with notification & lock‑screen controls
+- Waveform progress bar visualization
+- Queue tools: add to queue, play next, remove, clear
+- Drag & drop queue reordering
 
 ### 🗂 Library & Sorting
 
--   Browse Songs, Albums, Artists, Playlists
--   Real-time search
--   Sorting by:
-    -   Song title (A--Z / Z--A)
-    -   Artist name (A--Z / Z--A)
-    -   Duration (short → long / long → short)
--   Favorites system
--   Fast loading using Room caching
+- Browse Songs, Albums, Artists, Playlists
+- Real-time search
+- Sorting by:
+  - Song title (A--Z / Z--A)
+  - Artist name (A--Z / Z--A)
+  - Duration (short → long / long → short)
+- Favorites system
+- Fast loading using Room caching
 
 ### 🎛 Song Management
 
--   Edit audio metadata (title, artist, album)
--   Delete song from storage
--   Metadata editing using jaudiotagger
--   Auto refresh after edits
+- Edit audio metadata (title, artist, album)
+- Delete song from storage
+- Metadata editing using jaudiotagger
+- Auto refresh after edits
 
 ### 📋 Playlist System
 
--   Create, rename, delete playlists
--   Add/remove songs
--   Add playlist to queue
--   Playlist detail screen
+- Create, rename, delete playlists
+- Add/remove songs
+- Add playlist to queue
+- Playlist detail screen
 
 ### 🔧 Permissions Handling
 
@@ -48,69 +47,69 @@ Elgohary Music properly handles all required storage/audio permissions.
 
 #### Android 13+
 
--   READ_MEDIA_AUDIO
--   READ_MEDIA_IMAGES
--   File changes through SAF
+- READ_MEDIA_AUDIO  
+- READ_MEDIA_IMAGES  
+- File changes through SAF
 
 #### Android 10--12
 
--   READ_EXTERNAL_STORAGE
--   Writes via MediaStore
+- READ_EXTERNAL_STORAGE  
+- Writes via MediaStore
 
 #### Android 9 and below
 
--   READ_EXTERNAL_STORAGE
--   WRITE_EXTERNAL_STORAGE
+- READ_EXTERNAL_STORAGE  
+- WRITE_EXTERNAL_STORAGE
 
 ### 🌐 Localization & Themes
 
--   Full Arabic 🇪🇬 and English 🇬🇧 support
--   RTL support
--   Light, Dark, System theme modes
--   Persistent settings via DataStore
+- Full Arabic 🇪🇬 and English 🇬🇧 support  
+- RTL support  
+- Light, Dark, System theme modes  
+- Persistent settings via DataStore
 
 ### 🎨 UI/UX
 
--   100% Jetpack Compose
--   Material 3 components
--   Smooth transitions & animations
--   Coil for album art
+- 100% Jetpack Compose  
+- Material 3 components  
+- Smooth transitions & animations  
+- Coil for album art
 
-------------------------------------------------------------------------
+---
 
 ## 🛠 Tech Stack
 
--   Kotlin\
--   Jetpack Compose\
--   Media3 / ExoPlayer\
--   Room Database\
--   DataStore Preferences\
--   Hilt (DI)\
--   jaudiotagger\
--   Coil\
--   Accompanist Permissions\
--   Reorderable lists library
+- Kotlin  
+- Jetpack Compose  
+- Media3 / ExoPlayer  
+- Room Database  
+- DataStore Preferences  
+- Hilt (DI)  
+- jaudiotagger  
+- Coil  
+- Accompanist Permissions  
+- Reorderable lists library
 
-------------------------------------------------------------------------
+---
 
 ## 🚀 Getting Started
 
-1.  Clone repo\
-2.  Open in Android Studio\
-3.  Sync Gradle\
-4.  Run on device/emulator with audio files
+1. Clone repo  
+2. Open in Android Studio  
+3. Sync Gradle  
+4. Run on device/emulator with audio files
 
-------------------------------------------------------------------------
+---
 
 ## 📌 Future Enhancements
 
--   Sleep timer\
--   Built‑in equalizer\
--   Folder-based browsing\
--   Lyrics display\
--   Cloud playlist backup
+- Sleep timer  
+- Built‑in equalizer  
+- Folder-based browsing  
+- Lyrics display  
+- Cloud playlist backup
 
-------------------------------------------------------------------------
+---
 
 ## 📄 License
 
