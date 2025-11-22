@@ -1,11 +1,9 @@
-<img src="resources/Elgohary-Music app icon.png"
-     alt="Elgohary Music Icon"
-     width="140"
-     style="border-radius: 28px;" />
+<img src="resources/Elgohary-Music app icon.png" alt="Elgohary Music Icon" width="140"/>
 
 # **<span style="font-size:2em;">Elgohary Music</span>**
 
-**Elgohary Music** is a modern, smooth, and highly customizable offline music player for Android, inspired by Samsung Music and built with Jetpack Compose, Media3, and MVVM architecture.
+**Elgohary Music** is a modern, smooth, and highly customizable offline music player for Android, inspired by Samsung Music and built entirely with Jetpack Compose, Media3, and MVVM architecture.
+It features rich playback controls, playlist tools, song editing capabilities, waveform visualization, and complete Arabic/English localization.
 
 ---
 
@@ -24,9 +22,9 @@
 - Browse Songs, Albums, Artists, Playlists
 - Real-time search
 - Sorting by:
-  - Song title (A--Z / Z--A)
-  - Artist name (A--Z / Z--A)
-  - Duration (short → long / long → short)
+  - Song title
+  - Artist name
+  - Duration
 - Favorites system
 - Fast loading using Room caching
 
@@ -41,7 +39,6 @@
 
 - Create, rename, delete playlists
 - Add/remove songs
-- Add playlist to queue
 - Playlist detail screen
 
 ### 🔧 Permissions Handling
@@ -51,7 +48,6 @@ Elgohary Music properly handles all required storage/audio permissions.
 #### Android 13+
 
 - READ_MEDIA_AUDIO  
-- READ_MEDIA_IMAGES  
 - File changes through SAF
 
 #### Android 10--12
@@ -111,9 +107,3 @@ Elgohary Music properly handles all required storage/audio permissions.
 - Folder-based browsing  
 - Lyrics display  
 - Cloud playlist backup
-
----
-
-## 📄 License
-
-Add your preferred license here.
