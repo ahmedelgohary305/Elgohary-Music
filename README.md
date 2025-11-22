@@ -1,10 +1,4 @@
-```{=html}
-<p align="center">
-```
-` <img src="resources/Elgohary-Music app icon.png" width="140"/>`{=html}
-```{=html}
-</p>
-```
+<img src="resources/Elgohary-Music app icon.png" alt="Product Detail" width="140"/>
 # **Elgohary Music**
 
 **Elgohary Music** is a modern, smooth, and highly customizable offline
