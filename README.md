@@ -10,22 +10,64 @@ It features rich playback controls, playlist tools, song editing capabilities, w
 
 ## 📱 Screenshots
 
+### 🎵 Main Library Views
 <div align="center">
-  <img src="resources/Your Music screen.png" alt="Your Music Screen" width="250"/>
-  <img src="resources/Full player screen.png" alt="Full Player Screen" width="250"/>
-  <img src="resources/Albums screen.png" alt="Albums Screen" width="250"/>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="resources/Your Music screen.png" alt="Your Music Screen" width="250"/><br/>
+        <b>Your Music - Home Screen</b>
+      </td>
+      <td align="center">
+        <img src="resources/Albums screen.png" alt="Albums Screen" width="250"/><br/>
+        <b>Albums Library</b>
+      </td>
+      <td align="center">
+        <img src="resources/Artists screen.png" alt="Artists Screen" width="250"/><br/>
+        <b>Artists Library</b>
+      </td>
+    </tr>
+  </table>
 </div>
 
+### 🎶 Player & Details
 <div align="center">
-  <img src="resources/Artists screen.png" alt="Artists Screen" width="250"/>
-  <img src="resources/Albums and Artists detail screen.png" alt="Album & Artist Detail" width="250"/>
-  <img src="resources/Playlists screen.png" alt="Playlists Screen" width="250"/>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="resources/Full player screen.png" alt="Full Player Screen" width="250"/><br/>
+        <b>Full Player with Waveform</b>
+      </td>
+      <td align="center">
+        <img src="resources/Albums and Artists detail screen.png" alt="Album & Artist Detail" width="250"/><br/>
+        <b>Album/Artist Detail View</b>
+      </td>
+      <td align="center">
+        <img src="resources/Favorites screen.png" alt="Favorites Screen" width="250"/><br/>
+        <b>Favorites Collection</b>
+      </td>
+    </tr>
+  </table>
 </div>
 
+### 📋 Playlist Management
 <div align="center">
-  <img src="resources/Playlist detail screen.png" alt="Playlist Detail Screen" width="250"/>
-  <img src="resources/Playlist songs selecting screen.png" alt="Song Selection Screen" width="250"/>
-  <img src="resources/Favorites screen.png" alt="Favorites Screen" width="250"/>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="resources/Playlists screen.png" alt="Playlists Screen" width="250"/><br/>
+        <b>All Playlists</b>
+      </td>
+      <td align="center">
+        <img src="resources/Playlist detail screen.png" alt="Playlist Detail Screen" width="250"/><br/>
+        <b>Playlist Details</b>
+      </td>
+      <td align="center">
+        <img src="resources/Playlist songs selecting screen.png" alt="Song Selection Screen" width="250"/><br/>
+        <b>Add Songs to Playlist</b>
+      </td>
+    </tr>
+  </table>
 </div>
 
 ### 🎥 Demo Video
