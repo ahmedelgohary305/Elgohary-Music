@@ -70,9 +70,6 @@ It features rich playback controls, playlist tools, song editing capabilities, w
   </table>
 </div>
 
-### 🎥 Demo Video
-[Watch Elgohary Music in Action](resources/Elgohary-Music%20Showcase.mp4)
-
 ---
 
 ## ✨ Features
