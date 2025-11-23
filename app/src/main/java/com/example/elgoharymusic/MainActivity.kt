@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var requestReadPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var requestWritePermissionLauncher: ActivityResultLauncher<String>
+    private lateinit var requestMultiplePermissionsLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var manageStoragePermissionLauncher: ActivityResultLauncher<Intent>
 
     private var hasShownManageStorageDialog = false
@@ -71,16 +72,16 @@ class MainActivity : ComponentActivity() {
                     recreate()
                 }
             }
-                ElgoharyMusicTheme(darkTheme = isDarkTheme, language = language) {
-                    ModernMusicNavGraph(
-                        musicViewModel,
-                        favViewModel,
-                        playlistViewModel,
-                        language,
-                        isDarkTheme,
-                        this
-                    )
-                }
+            ElgoharyMusicTheme(darkTheme = isDarkTheme, language = language) {
+                ModernMusicNavGraph(
+                    musicViewModel,
+                    favViewModel,
+                    playlistViewModel,
+                    language,
+                    isDarkTheme,
+                    this
+                )
+            }
 
         }
     }
@@ -129,7 +130,39 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setupPermissionLaunchers() {
-        // Read Permission Launcher
+        // Multiple permissions launcher for Android 13+ (Audio + Images)
+        requestMultiplePermissionsLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            val audioGranted = permissions[Manifest.permission.READ_MEDIA_AUDIO] ?: false
+            val imagesGranted = permissions[Manifest.permission.READ_MEDIA_IMAGES] ?: false
+
+            if (audioGranted) {
+                musicViewModel.loadSongs()
+
+                // Request manage storage permission after audio is granted
+                if (!hasShownManageStorageDialog) {
+                    requestManageStoragePermission()
+                }
+
+                // Warn user if images permission not granted
+                if (!imagesGranted) {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.toast_album_art_permission),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            } else {
+                showPermissionDeniedDialog(
+                    title = getString(R.string.permission_storage_required),
+                    message = getString(R.string.permission_storage_message),
+                    isReadPermission = true
+                )
+            }
+        }
+
+        // Read Permission Launcher (for Android 10-12)
         requestReadPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
@@ -151,8 +184,8 @@ class MainActivity : ComponentActivity() {
                 }
             } else {
                 showPermissionDeniedDialog(
-                    title = "Storage Permission Required",
-                    message = "This app needs storage permission to access and play your music files. Please grant the permission in app settings.",
+                    title = getString(R.string.permission_storage_required),
+                    message = getString(R.string.permission_storage_message),
                     isReadPermission = true
                 )
             }
@@ -175,7 +208,7 @@ class MainActivity : ComponentActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Write permission denied. Song editing will be disabled.",
+                    getString(R.string.toast_write_permission_denied),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -192,13 +225,13 @@ class MainActivity : ComponentActivity() {
                 if (isGranted) {
                     Toast.makeText(
                         this,
-                        "Full storage access granted. You can now edit and delete songs.",
+                        getString(R.string.toast_storage_granted),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         this,
-                        "Storage management permission denied. Song editing and deletion will be limited.",
+                        getString(R.string.toast_storage_denied),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -208,21 +241,32 @@ class MainActivity : ComponentActivity() {
 
     private fun requestPermissions() {
         when {
-            // Android 13+ (API 33+): READ_MEDIA_AUDIO
+            // Android 13+ (API 33+): READ_MEDIA_AUDIO + READ_MEDIA_IMAGES
             Build.VERSION.SDK_INT >= 33 -> {
-                val hasReadPermission =
+                val hasAudioPermission =
                     checkSelfPermission(Manifest.permission.READ_MEDIA_AUDIO) == PackageManager.PERMISSION_GRANTED
+                val hasImagesPermission =
+                    checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED
 
-                if (!hasReadPermission) {
-                    // Check if we should show rationale
+                if (!hasAudioPermission || !hasImagesPermission) {
+                    // Check if we should show rationale for audio permission
                     if (shouldShowRequestPermissionRationale(Manifest.permission.READ_MEDIA_AUDIO)) {
                         showPermissionRationaleDialog(
-                            title = "Music Access Required",
-                            message = "This app needs permission to access your music files to play them. Without this permission, the app cannot function.",
-                            permission = Manifest.permission.READ_MEDIA_AUDIO
+                            title = getString(R.string.permission_media_access_required),
+                            message = getString(R.string.permission_media_access_message),
+                            permissions = arrayOf(
+                                Manifest.permission.READ_MEDIA_AUDIO,
+                                Manifest.permission.READ_MEDIA_IMAGES
+                            )
                         )
                     } else {
-                        requestReadPermissionLauncher.launch(Manifest.permission.READ_MEDIA_AUDIO)
+                        // Request both permissions at once
+                        requestMultiplePermissionsLauncher.launch(
+                            arrayOf(
+                                Manifest.permission.READ_MEDIA_AUDIO,
+                                Manifest.permission.READ_MEDIA_IMAGES
+                            )
+                        )
                     }
                 } else {
                     musicViewModel.loadSongs()
@@ -241,8 +285,8 @@ class MainActivity : ComponentActivity() {
                 if (!hasReadPermission) {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                         showPermissionRationaleDialog(
-                            title = "Storage Access Required",
-                            message = "This app needs permission to access your music files to play them. Without this permission, the app cannot function.",
+                            title = getString(R.string.permission_storage_access_required),
+                            message = getString(R.string.permission_storage_function_message),
                             permission = Manifest.permission.READ_EXTERNAL_STORAGE
                         )
                     } else {
@@ -264,8 +308,8 @@ class MainActivity : ComponentActivity() {
                 if (!hasReadPermission) {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                         showPermissionRationaleDialog(
-                            title = "Storage Access Required",
-                            message = "This app needs permission to access your music files to play them. Without this permission, the app cannot function.",
+                            title = getString(R.string.permission_storage_access_required),
+                            message = getString(R.string.permission_storage_function_message),
                             permission = Manifest.permission.READ_EXTERNAL_STORAGE
                         )
                     } else {
@@ -287,8 +331,8 @@ class MainActivity : ComponentActivity() {
                     !hasReadPermission -> {
                         if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                             showPermissionRationaleDialog(
-                                title = "Storage Access Required",
-                                message = "This app needs permission to access your music files to play them. Without this permission, the app cannot function.",
+                                title = getString(R.string.permission_storage_access_required),
+                                message = getString(R.string.permission_storage_function_message),
                                 permission = Manifest.permission.READ_EXTERNAL_STORAGE
                             )
                         } else {
@@ -299,8 +343,8 @@ class MainActivity : ComponentActivity() {
                     !hasWritePermission -> {
                         if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             showPermissionRationaleDialog(
-                                title = "Storage Write Access Required",
-                                message = "This app needs write permission to edit song metadata and delete files.",
+                                title = getString(R.string.permission_write_access_required),
+                                message = getString(R.string.permission_write_message),
                                 permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
                             )
                         } else {
@@ -328,28 +372,41 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun showPermissionRationaleDialog(title: String, message: String, permission: String) {
+    // Updated to support both single permission and multiple permissions
+    private fun showPermissionRationaleDialog(
+        title: String,
+        message: String,
+        permission: String? = null,
+        permissions: Array<String>? = null
+    ) {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("Grant") { dialog, _ ->
+            .setPositiveButton(getString(R.string.button_grant)) { dialog, _ ->
                 dialog.dismiss()
-                when (permission) {
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_MEDIA_AUDIO -> {
-                        requestReadPermissionLauncher.launch(permission)
+                when {
+                    permissions != null && Build.VERSION.SDK_INT >= 33 -> {
+                        requestMultiplePermissionsLauncher.launch(permissions)
                     }
+                    permission != null -> {
+                        when (permission) {
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_MEDIA_AUDIO -> {
+                                requestReadPermissionLauncher.launch(permission)
+                            }
 
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
-                        requestWritePermissionLauncher.launch(permission)
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
+                                requestWritePermissionLauncher.launch(permission)
+                            }
+                        }
                     }
                 }
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(getString(R.string.button_cancel)) { dialog, _ ->
                 dialog.dismiss()
                 Toast.makeText(
                     this,
-                    "Permission required to use the app",
+                    getString(R.string.toast_permission_required),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -360,23 +417,17 @@ class MainActivity : ComponentActivity() {
     private fun showManageStorageDialog() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             AlertDialog.Builder(this)
-                .setTitle("Additional Permission (Optional)")
-                .setMessage(
-                    "To enable editing and deleting songs, this app needs permission to manage files.\n\n" +
-                            "This allows you to:\n" +
-                            "• Edit song metadata (title, artist, album)\n" +
-                            "• Delete songs from your device\n\n" +
-                            "You can skip this if you only want to play music."
-                )
-                .setPositiveButton("Grant Permission") { dialog, _ ->
+                .setTitle(getString(R.string.permission_additional_optional))
+                .setMessage(getString(R.string.permission_manage_storage_message))
+                .setPositiveButton(getString(R.string.button_grant_permission)) { dialog, _ ->
                     dialog.dismiss()
                     launchManageStorageSettings()
                 }
-                .setNegativeButton("Skip") { dialog, _ ->
+                .setNegativeButton(getString(R.string.button_skip)) { dialog, _ ->
                     dialog.dismiss()
                     Toast.makeText(
                         this,
-                        "You can enable editing later in app settings",
+                        getString(R.string.toast_enable_editing_later),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -393,11 +444,11 @@ class MainActivity : ComponentActivity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("Open Settings") { dialog, _ ->
+            .setPositiveButton(getString(R.string.button_open_settings)) { dialog, _ ->
                 dialog.dismiss()
                 openAppSettings()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(getString(R.string.button_cancel)) { dialog, _ ->
                 dialog.dismiss()
                 if (isReadPermission) {
                     finish()
@@ -421,7 +472,7 @@ class MainActivity : ComponentActivity() {
                 } catch (ex: Exception) {
                     Toast.makeText(
                         this,
-                        "Unable to open settings. Please enable manually.",
+                        getString(R.string.toast_unable_open_settings),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -437,7 +488,7 @@ class MainActivity : ComponentActivity() {
         } catch (e: Exception) {
             Toast.makeText(
                 this,
-                "Unable to open settings",
+                getString(R.string.toast_unable_open_settings_short),
                 Toast.LENGTH_SHORT
             ).show()
         }

@@ -187,6 +187,40 @@
     <string name="queue_empty">Queue is empty</string>
     <string name="try_searching_different_keywords">Try searching with different keywords</string>
 
+    <string name="permission_storage_required">Storage Permission Required</string>
+    <string name="permission_media_access_required">Media Access Required</string>
+    <string name="permission_storage_access_required">Storage Access Required</string>
+    <string name="permission_write_access_required">Storage Write Access Required</string>
+    <string name="permission_additional_optional">Additional Permission (Optional)</string>
+
+    <!-- Permission Messages -->
+    <string name="permission_storage_message">This app needs storage permission to access and play your music files. Please grant the permission in app settings.</string>
+    <string name="permission_media_access_message">This app needs permission to access your music files and album art. Without these permissions, the app cannot display album artwork.</string>
+    <string name="permission_storage_function_message">This app needs permission to access your music files to play them. Without this permission, the app cannot function.</string>
+    <string name="permission_write_message">This app needs write permission to edit song metadata and delete files.</string>
+    <string name="permission_manage_storage_message">To enable editing and deleting songs, this app needs permission to manage files.\n\nThis allows you to:\n• Edit song metadata (title, artist, album)\n• Delete songs from your device\n\nYou can skip this if you only want to play music.</string>
+
+    <!-- Permission Toast Messages -->
+    <string name="toast_album_art_permission">Album art images won\'t be displayed without image permission</string>
+    <string name="toast_write_permission_denied">Write permission denied. Song editing will be disabled.</string>
+    <string name="toast_storage_granted">Full storage access granted. You can now edit and delete songs.</string>
+    <string name="toast_storage_denied">Storage management permission denied. Song editing and deletion will be limited.</string>
+    <string name="toast_permission_required">Permission required to use the app</string>
+    <string name="toast_enable_editing_later">You can enable editing later in app settings</string>
+    <string name="toast_unable_open_settings">Unable to open settings. Please enable manually.</string>
+    <string name="toast_unable_open_settings_short">Unable to open settings</string>
+
+    <!-- Permission Button Labels -->
+    <string name="button_grant">Grant</string>
+    <string name="button_grant_permission">Grant Permission</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_skip">Skip</string>
+    <string name="button_open_settings">Open Settings</string>
+
+    <!-- Permission Features List -->
+    <string name="feature_edit_metadata">Edit song metadata (title, artist, album)</string>
+    <string name="feature_delete_songs">Delete songs from your device</string>
+
     <plurals name="album_count">
         <item quantity="one">%d album</item>
         <item quantity="other">%d albums</item>

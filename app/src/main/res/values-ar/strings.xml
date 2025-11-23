@@ -188,6 +188,40 @@
     <string name="queue_empty">قائمة التشغيل فارغة</string>
     <string name="try_searching_different_keywords">جرّب البحث بكلمات مختلفة</string>
 
+    <string name="permission_storage_required">إذن التخزين مطلوب</string>
+    <string name="permission_media_access_required">الوصول إلى الوسائط مطلوب</string>
+    <string name="permission_storage_access_required">الوصول إلى التخزين مطلوب</string>
+    <string name="permission_write_access_required">إذن الكتابة على التخزين مطلوب</string>
+    <string name="permission_additional_optional">إذن إضافي (اختياري)</string>
+
+    <!-- Permission Messages -->
+    <string name="permission_storage_message">يحتاج هذا التطبيق إلى إذن التخزين للوصول إلى ملفات الموسيقى وتشغيلها. يرجى منح الإذن في إعدادات التطبيق.</string>
+    <string name="permission_media_access_message">يحتاج هذا التطبيق إلى إذن للوصول إلى ملفات الموسيقى وصور الألبومات. بدون هذه الأذونات، لن يتمكن التطبيق من عرض أغلفة الألبومات.</string>
+    <string name="permission_storage_function_message">يحتاج هذا التطبيق إلى إذن للوصول إلى ملفات الموسيقى لتشغيلها. بدون هذا الإذن، لن يعمل التطبيق.</string>
+    <string name="permission_write_message">يحتاج هذا التطبيق إلى إذن الكتابة لتحرير بيانات الأغاني وحذف الملفات.</string>
+    <string name="permission_manage_storage_message">لتمكين تحرير وحذف الأغاني، يحتاج هذا التطبيق إلى إذن لإدارة الملفات.\n\nيتيح لك ذلك:\n• تحرير بيانات الأغنية (العنوان، الفنان، الألبوم)\n• حذف الأغاني من جهازك\n\nيمكنك تخطي هذا إذا كنت تريد تشغيل الموسيقى فقط.</string>
+
+    <!-- Permission Toast Messages -->
+    <string name="toast_album_art_permission">لن يتم عرض صور أغلفة الألبومات بدون إذن الصور</string>
+    <string name="toast_write_permission_denied">تم رفض إذن الكتابة. سيتم تعطيل تحرير الأغاني.</string>
+    <string name="toast_storage_granted">تم منح الوصول الكامل للتخزين. يمكنك الآن تحرير وحذف الأغاني.</string>
+    <string name="toast_storage_denied">تم رفض إذن إدارة التخزين. سيكون تحرير وحذف الأغاني محدودًا.</string>
+    <string name="toast_permission_required">الإذن مطلوب لاستخدام التطبيق</string>
+    <string name="toast_enable_editing_later">يمكنك تمكين التحرير لاحقًا في إعدادات التطبيق</string>
+    <string name="toast_unable_open_settings">غير قادر على فتح الإعدادات. يرجى التمكين يدويًا.</string>
+    <string name="toast_unable_open_settings_short">غير قادر على فتح الإعدادات</string>
+
+    <!-- Permission Button Labels -->
+    <string name="button_grant">منح</string>
+    <string name="button_grant_permission">منح الإذن</string>
+    <string name="button_cancel">إلغاء</string>
+    <string name="button_skip">تخطي</string>
+    <string name="button_open_settings">فتح الإعدادات</string>
+
+    <!-- Permission Features List -->
+    <string name="feature_edit_metadata">تحرير بيانات الأغنية (العنوان، الفنان، الألبوم)</string>
+    <string name="feature_delete_songs">حذف الأغاني من جهازك</string>
+
 
     <plurals name="album_count" tools:ignore="MissingQuantity">
         <item quantity="one">%d ألبوم</item>

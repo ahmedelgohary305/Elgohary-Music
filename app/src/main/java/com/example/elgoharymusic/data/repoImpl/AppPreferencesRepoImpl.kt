@@ -20,7 +20,7 @@ enum class AppLanguage {
 
 data class AppPreferences(
     val sortOrder: SortOrder = SortOrder.TITLE_ASC,
-    val isDarkTheme: Boolean = false,
+    val isDarkTheme: Boolean = true,
     val language: AppLanguage = AppLanguage.ENGLISH
 )
 @Singleton
