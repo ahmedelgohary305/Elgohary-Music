@@ -17,20 +17,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 
 @Composable
 fun EmptyState(
     emptyMessage: String,
     emptyDescription: String,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     currentSong: Song?,
     miniPlayerHeight: Dp = 88.dp,
     painter: Painter
@@ -70,7 +68,7 @@ fun EmptyState(
                 textAlign = TextAlign.Center,
                 lineHeight = 20.sp,
                 modifier = Modifier.offset(
-                    y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                    y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                 )
             )
         }

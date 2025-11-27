@@ -2,7 +2,6 @@ package com.example.elgoharymusic.presentation.utils
 
 import android.content.Context
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -11,14 +10,15 @@ import java.util.concurrent.TimeUnit
 object TimeFormatter {
 
     // Your original duration formatter (enhanced)
-    fun formatDuration(milliseconds: Long, language: AppLanguage): String {
+    fun formatDuration(milliseconds: Long, language: String): String {
         val seconds = (milliseconds / 1000) % 60
         val minutes = (milliseconds / (1000 * 60)) % 60
         val hours = milliseconds / (1000 * 60 * 60)
 
         val locale = when (language) {
-            AppLanguage.ARABIC -> Locale("ar")
-            AppLanguage.ENGLISH -> Locale.ENGLISH
+            LocaleManager.Language.ARABIC.code -> Locale("ar")
+            LocaleManager.Language.ENGLISH.code -> Locale.ENGLISH
+            else -> Locale.getDefault()
         }
 
         return if (hours > 0) {
@@ -51,15 +51,16 @@ object TimeFormatter {
     }
 
     // Format creation date specifically for playlists
-    fun formatPlaylistCreationDate(timestamp: Long, language: AppLanguage, context: Context): String {
+    fun formatPlaylistCreationDate(timestamp: Long, language: String, context: Context): String {
         val date = Date(timestamp)
         val now = Date()
         val diffInMillis = now.time - timestamp
         val days = TimeUnit.MILLISECONDS.toDays(diffInMillis)
 
         val locale = when (language) {
-            AppLanguage.ARABIC -> Locale("ar")
-            AppLanguage.ENGLISH -> Locale.ENGLISH
+            LocaleManager.Language.ARABIC.code -> Locale("ar")
+            LocaleManager.Language.ENGLISH.code -> Locale.ENGLISH
+            else -> Locale.getDefault()
         }
 
         return when {
@@ -93,14 +94,14 @@ object TimeFormatter {
 }
 
 // Extension functions for convenience
-fun Long.formatDuration(language: AppLanguage): String =
+fun Long.formatDuration(language: String): String =
     TimeFormatter.formatDuration(this, language)
 
-fun Long.formatPlaylistCreation(language: AppLanguage, context: Context): String =
+fun Long.formatPlaylistCreation(language: String, context: Context): String =
     TimeFormatter.formatPlaylistCreationDate(this, language, context)
 
-fun Int.toLocalizedDigits(language: AppLanguage): String {
-    return if (language == AppLanguage.ARABIC) {
+fun Int.toLocalizedDigits(language: String): String {
+    return if (language == LocaleManager.Language.ARABIC.code) {
         NumberFormat.getInstance(Locale("ar")).format(this)
     } else {
         this.toString()

@@ -42,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.viewmodels.FavViewModel
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
@@ -71,7 +70,7 @@ fun MediaDetailScreen(
     musicViewModel: MusicViewModel,
     favViewModel: FavViewModel,
     playlistViewModel: PlaylistViewModel,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     context: Context,
     onNavigateBack: () -> Unit,
     onNavigateToPlayer: () -> Unit,
@@ -302,7 +301,7 @@ fun MediaDetailScreen(
 @Composable
 fun MediaHeader(
     mediaInfo: MediaInfo,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -390,7 +389,7 @@ fun MediaHeader(
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.offset(
-                                y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                                y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                             )
                         )
                     }
@@ -406,7 +405,7 @@ fun MediaHeader(
                         style = MaterialTheme.typography.bodyMedium,
                         color = colorScheme.onSurface.copy(alpha = 0.6f),
                         modifier = Modifier.offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-8).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-8).dp else 0.dp
                         )
                     )
                 }

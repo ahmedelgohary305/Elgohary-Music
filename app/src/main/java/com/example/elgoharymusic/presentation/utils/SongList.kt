@@ -67,7 +67,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.screens.NoRtl
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
@@ -80,7 +79,7 @@ fun SongList(
     currentSong: Song?,
     musicViewModel: MusicViewModel,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onSongClick: (Song) -> Unit,
     onEditSong: ((Song) -> Unit)? = null,
     onDeleteSong: ((Song) -> Unit)? = null,
@@ -432,7 +431,7 @@ fun SongItem(
     isSelected: Boolean = false,
     isSelectionMode: Boolean = false,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onClick: () -> Unit,
     onLongClick: () -> Unit = {},
     menuOptions: List<SongMenuOption> = emptyList()
@@ -486,7 +485,7 @@ fun SongItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = if (currentLanguage == AppLanguage.ARABIC) 6.dp else 12.dp),
+                .padding(horizontal = 16.dp, vertical = if (currentLanguage == LocaleManager.Language.ARABIC.code) 6.dp else 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             AnimatedVisibility(
@@ -634,7 +633,7 @@ fun SongItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f, fill = false).offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
 
@@ -646,7 +645,7 @@ fun SongItem(
                             else -> MaterialTheme.colorScheme.onSurface
                         },
                         modifier = Modifier.offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
 

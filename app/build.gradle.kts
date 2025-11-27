@@ -18,6 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resourceConfigurations += listOf("en", "ar")
     }
 
     buildTypes {
@@ -97,4 +99,8 @@ dependencies {
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    implementation("com.google.android.material:material:1.13.0")
+
+    implementation("androidx.appcompat:appcompat:1.7.1")
 }

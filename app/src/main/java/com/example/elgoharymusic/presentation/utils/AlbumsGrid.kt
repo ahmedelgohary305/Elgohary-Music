@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Album
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
 
@@ -44,7 +43,7 @@ import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
 fun AlbumsGrid(
     modifier: Modifier = Modifier,
     albums: List<Album>,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     musicViewModel: MusicViewModel,
     onAlbumClick: (Album) -> Unit,
     emptyMessage: String = stringResource(R.string.no_albums_found),
@@ -83,7 +82,7 @@ fun AlbumsGrid(
 @Composable
 fun AlbumGridItem(
     album: Album,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     musicViewModel: MusicViewModel,
     onAlbumClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -129,7 +128,7 @@ fun AlbumGridItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.offset(
-                y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
             )
         )
 
@@ -140,7 +139,7 @@ fun AlbumGridItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.offset(
-                y = if (currentLanguage == AppLanguage.ARABIC) (-12).dp else 0.dp
+                y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-12).dp else 0.dp
             )
         )
     }

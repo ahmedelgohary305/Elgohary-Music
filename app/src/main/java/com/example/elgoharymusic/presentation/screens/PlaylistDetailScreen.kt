@@ -49,11 +49,11 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Playlist
 import com.example.elgoharymusic.presentation.Routes
 import com.example.elgoharymusic.presentation.utils.BottomContent
 import com.example.elgoharymusic.presentation.utils.CreatePlaylistDialog
+import com.example.elgoharymusic.presentation.utils.LocaleManager
 import com.example.elgoharymusic.presentation.utils.MediaArtworkBox
 import com.example.elgoharymusic.presentation.utils.PlaylistBottomSheet
 import com.example.elgoharymusic.presentation.utils.PlaylistSheetMode
@@ -72,7 +72,7 @@ import com.example.elgoharymusic.presentation.viewmodels.PlaylistViewModel
 fun PlaylistDetailScreen(
     playlistId: Long,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     playlistViewModel: PlaylistViewModel,
     musicViewModel: MusicViewModel,
     favViewModel: FavViewModel,
@@ -297,7 +297,7 @@ fun PlaylistDetailHeader(
     playlist: Playlist,
     context: Context,
     onBackClick: () -> Unit,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit,
     onAddSongsClick: () -> Unit,
@@ -440,7 +440,7 @@ fun PlaylistDetailHeader(
                         color = colorScheme.onBackground.copy(alpha = 0.7f),
                         textAlign = TextAlign.Center,
                         modifier = Modifier.offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
 
@@ -450,7 +450,7 @@ fun PlaylistDetailHeader(
                         style = MaterialTheme.typography.bodyMedium,
                         color = colorScheme.onSurfaceVariant,
                         modifier = Modifier.offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
                     Text(
@@ -461,7 +461,7 @@ fun PlaylistDetailHeader(
                         style = MaterialTheme.typography.bodyMedium,
                         color = colorScheme.onSurface.copy(0.8f),
                         modifier = Modifier.offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
                 }
@@ -474,7 +474,7 @@ fun PlaylistDetailHeader(
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(top = 4.dp).offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
                 }

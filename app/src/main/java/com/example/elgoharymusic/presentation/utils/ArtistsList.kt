@@ -45,7 +45,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Artist
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
@@ -55,7 +54,7 @@ fun ArtistsList(
     artists: List<Artist>,
     currentSong: Song?,
     musicViewModel: MusicViewModel,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     context: Context,
     onArtistClick: (Artist) -> Unit,
     miniPlayerHeight: Dp = 88.dp,
@@ -100,7 +99,7 @@ fun ArtistsList(
 @Composable
 fun ArtistCard(
     artist: Artist,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     context: Context,
     onArtistClick: () -> Unit,
     onPlayClick: () -> Unit,
@@ -180,7 +179,7 @@ fun ArtistCard(
                         style = MaterialTheme.typography.bodySmall,
                         color = colorScheme.onSurface,
                         modifier = Modifier.offset(
-                            y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                         )
                     )
 
@@ -191,7 +190,7 @@ fun ArtistCard(
                             style = MaterialTheme.typography.bodySmall,
                             color = colorScheme.onSurface,
                             modifier = Modifier.offset(
-                                y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                                y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                             )
                         )
 
@@ -205,7 +204,7 @@ fun ArtistCard(
                             style = MaterialTheme.typography.bodySmall,
                             color = colorScheme.onSurface,
                             modifier = Modifier.offset(
-                                y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                                y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                             )
                         )
                     }

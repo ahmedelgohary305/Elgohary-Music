@@ -1,12 +1,10 @@
 package com.example.elgoharymusic.presentation.viewmodels
 
 
-import android.content.Context
+
 import android.content.IntentSender
-import androidx.activity.ComponentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.data.repoImpl.RecoverableSecurityException
 import com.example.elgoharymusic.domain.models.Album
 import com.example.elgoharymusic.domain.models.Artist
@@ -14,9 +12,7 @@ import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.domain.repo.AppPreferencesRepo
 import com.example.elgoharymusic.domain.repo.MusicRepo
 import com.example.elgoharymusic.presentation.MusicController
-import com.example.elgoharymusic.saveLanguagePreference
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,7 +42,6 @@ class MusicViewModel @Inject constructor(
     private val musicRepo: MusicRepo,
     private val musicController: MusicController,
     private val appPreferencesRepo: AppPreferencesRepo,
-    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     // Preferences
@@ -55,9 +50,6 @@ class MusicViewModel @Inject constructor(
 
     private val _isDarkTheme = MutableStateFlow(false)
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme
-
-    private val _language = MutableStateFlow(AppLanguage.ENGLISH)
-    val language: StateFlow<AppLanguage> = _language
 
     // Settings Drawer
     private val _isSettingsDrawerOpen = MutableStateFlow(false)
@@ -152,7 +144,6 @@ class MusicViewModel @Inject constructor(
             appPreferencesRepo.getPreferencesFlow().collectLatest { prefs ->
                 _sortOrder.value = prefs.sortOrder
                 _isDarkTheme.value = prefs.isDarkTheme
-                _language.value = prefs.language
             }
         }
     }
@@ -173,23 +164,6 @@ class MusicViewModel @Inject constructor(
     fun setDarkTheme(isDark: Boolean) {
         viewModelScope.launch {
             appPreferencesRepo.setIsDarkTheme(isDark)
-        }
-    }
-
-    fun setLanguage(language: AppLanguage) {
-        viewModelScope.launch {
-            // Save to DataStore
-            appPreferencesRepo.setLanguage(language)
-
-            // Save to SharedPreferences for attachBaseContext
-            context.saveLanguagePreference(language)
-
-            // Trigger activity recreation to apply RTL
-            if (context is ComponentActivity) {
-                withContext(Dispatchers.Main) {
-                    context.recreate()
-                }
-            }
         }
     }
 

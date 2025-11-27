@@ -23,7 +23,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.presentation.Routes
 import com.example.elgoharymusic.presentation.screens.AlbumSongsScreen
 import com.example.elgoharymusic.presentation.screens.ArtistSongsScreen
@@ -39,7 +38,7 @@ fun ModernMusicNavGraph(
     musicViewModel: MusicViewModel,
     favViewModel: FavViewModel,
     playlistViewModel: PlaylistViewModel,
-    language: AppLanguage,
+    language: String,
     isDarkTheme: Boolean,
     context: Context
 ) {

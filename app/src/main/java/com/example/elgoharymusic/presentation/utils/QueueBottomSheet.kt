@@ -65,7 +65,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
@@ -83,7 +82,7 @@ fun QueueBottomSheet(
     onReorderQueue: (Int, Int) -> Unit,
     onDismiss: () -> Unit,
     colorScheme: ColorScheme,
-    currentLanguage: AppLanguage
+    currentLanguage: String
 ) {
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true
@@ -327,7 +326,7 @@ fun QueueBottomSheet(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                                 modifier = Modifier.offset(
-                                    y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                                    y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                                 )
                             )
                         }

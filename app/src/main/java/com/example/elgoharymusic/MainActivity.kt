@@ -17,8 +17,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.lifecycleScope
 import com.example.elgoharymusic.presentation.viewmodels.FavViewModel
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
@@ -29,12 +33,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import java.util.Locale
 import androidx.core.content.edit
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val musicViewModel: MusicViewModel by viewModels()
     private val favViewModel: FavViewModel by viewModels()
@@ -56,23 +59,13 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val isDarkTheme by musicViewModel.isDarkTheme.collectAsStateWithLifecycle()
-            val language by musicViewModel.language.collectAsStateWithLifecycle()
+            val locales = AppCompatDelegate.getApplicationLocales()
+            val language = locales[0]?.language ?: Locale.getDefault().language
 
-            // Observe language changes and recreate activity
-            LaunchedEffect(language) {
-                val currentLocale = resources.configuration.locales[0]
-                val targetLocale = when (language) {
-                    AppLanguage.ENGLISH -> Locale.ENGLISH
-                    AppLanguage.ARABIC -> Locale("ar")
-                }
-
-                // Only recreate if locale actually changed
-                if (currentLocale.language != targetLocale.language) {
-                    updateLocale(targetLocale)
-                    recreate()
-                }
-            }
-            ElgoharyMusicTheme(darkTheme = isDarkTheme, language = language) {
+            ElgoharyMusicTheme(
+                darkTheme = isDarkTheme,
+                language = language
+            ) {
                 ModernMusicNavGraph(
                     musicViewModel,
                     favViewModel,
@@ -82,50 +75,6 @@ class MainActivity : ComponentActivity() {
                     this
                 )
             }
-
-        }
-    }
-
-    private fun updateLocale(locale: Locale) {
-        Locale.setDefault(locale)
-
-        val config = Configuration(resources.configuration)
-        config.setLocale(locale)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            config.setLayoutDirection(locale)
-        }
-
-        resources.updateConfiguration(config, resources.displayMetrics)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            createConfigurationContext(config)
-        }
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(updateBaseContextLocale(newBase))
-    }
-
-    private fun updateBaseContextLocale(context: Context): Context {
-        val sharedPrefs = context.getSharedPreferences("app_preferences_temp", Context.MODE_PRIVATE)
-        val languageCode = sharedPrefs.getString("language", "en") ?: "en"
-
-        val locale = if (languageCode == "ar") Locale("ar") else Locale.ENGLISH
-        Locale.setDefault(locale)
-
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            config.setLayoutDirection(locale)
-        }
-
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            context.createConfigurationContext(config)
-        } else {
-            context.resources.updateConfiguration(config, context.resources.displayMetrics)
-            context
         }
     }
 
@@ -543,15 +492,5 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         hasShownManageStorageDialog = false
-    }
-}
-
-fun Context.saveLanguagePreference(language: AppLanguage) {
-    val sharedPrefs = getSharedPreferences("app_preferences_temp", Context.MODE_PRIVATE)
-    sharedPrefs.edit {
-        putString(
-            "language",
-            if (language == AppLanguage.ARABIC) "ar" else "en"
-        )
     }
 }

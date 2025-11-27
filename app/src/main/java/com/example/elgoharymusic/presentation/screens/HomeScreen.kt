@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -50,7 +49,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -67,7 +65,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -78,12 +75,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.presentation.Routes
 import com.example.elgoharymusic.presentation.utils.AlbumsGrid
 import com.example.elgoharymusic.presentation.utils.ArtistsList
 import com.example.elgoharymusic.presentation.utils.BottomContent
 import com.example.elgoharymusic.presentation.utils.CreatePlaylistDialog
+import com.example.elgoharymusic.presentation.utils.LocaleManager
 import com.example.elgoharymusic.presentation.utils.PlaylistTab
 import com.example.elgoharymusic.presentation.utils.SearchField
 import com.example.elgoharymusic.presentation.utils.SearchResultsList
@@ -107,7 +104,7 @@ fun ModernHomeScreen(
     playlistViewModel: PlaylistViewModel,
     navController: NavController,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     selectedTab: Int,
     onTabSelected: (Int) -> Unit,
     onNavigateToPlayer: () -> Unit
@@ -310,9 +307,6 @@ fun ModernHomeScreen(
             currentLanguage = currentLanguage,
             isDarkTheme = isDarkTheme,
             onDismiss = { musicViewModel.closeSettingsDrawer() },
-            onLanguageChange = { newLanguage ->
-                musicViewModel.setLanguage(newLanguage)
-            },
             onThemeChange = { isDark ->
                 musicViewModel.setDarkTheme(isDark)
             }
@@ -327,7 +321,7 @@ private fun ModernHeader(
     isSearchActive: Boolean,
     searchQuery: String,
     listState: LazyListState,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     context: Context,
     onTabSelected: (Int) -> Unit,
     onSearchActivated: () -> Unit,
@@ -352,7 +346,8 @@ private fun ModernHeader(
         if (songCount == 1) {
             context.getString(R.string.one_song_in_library)
         } else {
-            context.getString(R.string.songs_in_library,
+            context.getString(
+                R.string.songs_in_library,
                 songCount.toLocalizedDigits(currentLanguage)
             )
         },
@@ -392,8 +387,8 @@ private fun ModernHeader(
                         ),
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
-                            letterSpacing = if (currentLanguage == AppLanguage.ARABIC) 0.sp else (-0.5).sp,
-                            lineHeight = if (currentLanguage == AppLanguage.ARABIC) 1.sp else
+                            letterSpacing = if (currentLanguage == LocaleManager.Language.ARABIC.code) 0.sp else (-0.5).sp,
+                            lineHeight = if (currentLanguage == LocaleManager.Language.ARABIC.code) 1.sp else
                                 MaterialTheme.typography.headlineMedium.lineHeight,
                         ),
                         color = colorScheme.tertiary,
@@ -411,7 +406,7 @@ private fun ModernHeader(
                         color = colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .offset(y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp)
+                            .offset(y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp)
                     )
                 }
 
@@ -457,7 +452,7 @@ private fun ModernHeader(
 @Composable
 fun HeaderButton(
     onClick: () -> Unit,
-    @DrawableRes iconRes : Int,
+    @DrawableRes iconRes: Int,
 ) {
     IconButton(
         onClick = onClick,
@@ -476,7 +471,7 @@ fun headerText(
     selectedTab: Int,
     stringList: List<String>
 ): String {
-   return when(selectedTab){
+    return when (selectedTab) {
         0 -> stringList[0]
         1 -> stringList[1]
         2 -> stringList[2]
@@ -491,74 +486,63 @@ fun headerText(
 @Composable
 fun SettingsBottomSheet(
     isOpen: Boolean,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     isDarkTheme: Boolean,
     onDismiss: () -> Unit,
-    onLanguageChange: (AppLanguage) -> Unit,
     onThemeChange: (Boolean) -> Unit
 ) {
 
     if (isOpen) {
-        key(currentLanguage) {
-            val layoutDirection = when (currentLanguage) {
-                AppLanguage.ARABIC -> LayoutDirection.Rtl
-                AppLanguage.ENGLISH -> LayoutDirection.Ltr
-            }
 
-            CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
-                ModalBottomSheet(
-                    onDismissRequest = onDismiss,
-                    sheetState = rememberModalBottomSheetState(),
-                    shape = RoundedCornerShape(16.dp),
-                    containerColor = colorScheme.surface,
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 24.dp)
-                            .padding(bottom = 32.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.settings), // Use string resource
-                            style = MaterialTheme.typography.headlineSmall.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            color = colorScheme.onSurface,
-                            modifier = Modifier
-                                .padding(bottom = 24.dp)
-                                .offset(
-                                    y = if (currentLanguage == AppLanguage.ARABIC) (5).dp else 0.dp
-                                )
+        ModalBottomSheet(
+            onDismissRequest = onDismiss,
+            sheetState = rememberModalBottomSheetState(),
+            shape = RoundedCornerShape(16.dp),
+            containerColor = colorScheme.surface,
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+                    .padding(bottom = 32.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.settings), // Use string resource
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = colorScheme.onSurface,
+                    modifier = Modifier
+                        .padding(bottom = 24.dp)
+                        .offset(
+                            y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (5).dp else 0.dp
                         )
+                )
 
-                        SettingsSection(
-                            title = stringResource(R.string.language),
-                            icon = R.drawable.language
-                        ) {
-                            LanguageSelector(
-                                currentLanguage = currentLanguage,
-                                onLanguageChange = onLanguageChange
-                            )
-                        }
+                SettingsSection(
+                    title = stringResource(R.string.language),
+                    icon = R.drawable.language
+                ) {
+                    LanguageSelector(
+                        currentLanguage = currentLanguage,
+                    )
+                }
 
-                        Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-                        SettingsSection(
-                            title = stringResource(R.string.theme),
-                            icon = R.drawable.dark_theme
-                        ) {
-                            ThemeToggle(
-                                isDarkTheme = isDarkTheme,
-                                onThemeChange = onThemeChange
-                            )
-                        }
-                    }
+                SettingsSection(
+                    title = stringResource(R.string.theme),
+                    icon = R.drawable.dark_theme
+                ) {
+                    ThemeToggle(
+                        isDarkTheme = isDarkTheme,
+                        onThemeChange = onThemeChange
+                    )
                 }
             }
         }
     }
 }
-
 
 
 @Composable
@@ -578,7 +562,9 @@ private fun SettingsSection(
                 painter = painterResource(id = icon),
                 contentDescription = null,
                 tint = colorScheme.tertiary,
-              modifier = if (icon == R.drawable.dark_theme) Modifier.size(18.dp) else Modifier.size(22.dp)
+                modifier = if (icon == R.drawable.dark_theme) Modifier.size(18.dp) else Modifier.size(
+                    22.dp
+                )
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
@@ -595,8 +581,7 @@ private fun SettingsSection(
 
 @Composable
 private fun LanguageSelector(
-    currentLanguage: AppLanguage,
-    onLanguageChange: (AppLanguage) -> Unit
+    currentLanguage: String,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -605,15 +590,15 @@ private fun LanguageSelector(
         LanguageOption(
             label = "English",
             fontFamily = EnglishFontFamily,
-            isSelected = currentLanguage == AppLanguage.ENGLISH,
-            onClick = { onLanguageChange(AppLanguage.ENGLISH) },
+            isSelected = currentLanguage == LocaleManager.Language.ENGLISH.code,
+            onClick = { LocaleManager.setLocale(LocaleManager.Language.ENGLISH) },
             modifier = Modifier.weight(1f)
         )
         LanguageOption(
             label = "العربية",
             fontFamily = ArabicFontFamily,
-            isSelected = currentLanguage == AppLanguage.ARABIC,
-            onClick = { onLanguageChange(AppLanguage.ARABIC) },
+            isSelected = currentLanguage == LocaleManager.Language.ARABIC.code,
+            onClick = { LocaleManager.setLocale(LocaleManager.Language.ARABIC) },
             modifier = Modifier.weight(1f)
         )
     }
@@ -701,19 +686,24 @@ fun CarouselNavigationTabs(
     NoRtl {
 
         val tabs = listOf(
-            NavigationTab(stringResource(R.string.playlists),
+            NavigationTab(
+                stringResource(R.string.playlists),
                 painterResource(R.drawable.music_playlist)
             ),
-            NavigationTab(stringResource(R.string.favorites),
+            NavigationTab(
+                stringResource(R.string.favorites),
                 painterResource(R.drawable.favorite_border)
             ),
-            NavigationTab(stringResource(R.string.your_music),
+            NavigationTab(
+                stringResource(R.string.your_music),
                 painterResource(R.drawable.song)
             ),
-            NavigationTab(stringResource(R.string.albums),
+            NavigationTab(
+                stringResource(R.string.albums),
                 painterResource(R.drawable.music_album)
             ),
-            NavigationTab(stringResource(R.string.artists),
+            NavigationTab(
+                stringResource(R.string.artists),
                 painterResource(R.drawable.artist)
             )
         )
@@ -752,7 +742,8 @@ fun CarouselNavigationTabs(
         LaunchedEffect(isScrolling, isProgrammaticScroll) {
             if (wasScrolling && !isScrolling && !isProgrammaticScroll) {
                 val layoutInfo = listState.layoutInfo
-                val viewportCenter = layoutInfo.viewportStartOffset + layoutInfo.viewportSize.width / 2
+                val viewportCenter =
+                    layoutInfo.viewportStartOffset + layoutInfo.viewportSize.width / 2
 
                 var closestIndex = selectedTab
                 var minDistance = Float.MAX_VALUE

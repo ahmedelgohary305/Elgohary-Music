@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
+import com.example.elgoharymusic.presentation.utils.LocaleManager
 
 private val DarkColorScheme = darkColorScheme(
     primary = ModernMusicColors.Primary,
@@ -63,10 +63,11 @@ val ArabicFontFamily = FontFamily(
 )
 
 // Create Typography based on language
-fun getTypography(language: AppLanguage): Typography {
+fun getTypography(language: String): Typography {
     val fontFamily = when (language) {
-        AppLanguage.ENGLISH -> EnglishFontFamily
-        AppLanguage.ARABIC -> ArabicFontFamily
+        LocaleManager.Language.ENGLISH.code -> EnglishFontFamily
+        LocaleManager.Language.ARABIC.code -> ArabicFontFamily
+        else -> EnglishFontFamily
     }
 
     return Typography(
@@ -190,11 +191,10 @@ val shapes = Shapes(
 @Composable
 fun ElgoharyMusicTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    language: AppLanguage = AppLanguage.ENGLISH,
+    language: String,
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) DarkColorScheme else LightColorScheme
-
     val typography = getTypography(language)
 
     MaterialTheme(
@@ -204,3 +204,4 @@ fun ElgoharyMusicTheme(
         content = content
     )
 }
+

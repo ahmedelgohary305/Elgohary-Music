@@ -64,7 +64,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -75,7 +74,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Playlist
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.Routes
@@ -89,7 +87,7 @@ fun PlaylistTab(
     musicViewModel: MusicViewModel,
     navController: NavController,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     modifier: Modifier = Modifier,
     onCreatePlaylist: () -> Unit = {}
 ) {
@@ -142,7 +140,7 @@ fun PlaylistTab(
 @Composable
 fun EmptyPlaylistsState(
     onCreatePlaylist: () -> Unit,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
 ) {
     Column(
         modifier = Modifier
@@ -176,7 +174,7 @@ fun EmptyPlaylistsState(
             modifier = Modifier
                 .padding(top = 8.dp)
                 .offset(
-                    y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                    y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                 )
         )
 
@@ -206,7 +204,7 @@ fun EmptyPlaylistsState(
 fun PlaylistCard(
     playlist: Playlist,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onPlaylistClick: () -> Unit,
     onPlayClick: () -> Unit,
     onDeleteClick: () -> Unit
@@ -310,7 +308,7 @@ fun PlaylistCard(
                 color = Color.White,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.offset(
-                    y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp
+                    y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp
                 )
             )
         }
@@ -336,7 +334,7 @@ fun CreatePlaylistDialog(
     onDismiss: () -> Unit,
     onCreatePlaylist: (String, String?, List<Song>) -> Unit,
     musicViewModel: MusicViewModel,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     preselectedSongs: List<Song> = emptyList(),
     context: Context,
 ) {
@@ -437,7 +435,7 @@ fun CreatePlaylistDialog(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(top = 4.dp)
-                                    .offset(y = if (currentLanguage == AppLanguage.ARABIC) (-6).dp else 0.dp)
+                                    .offset(y = if (currentLanguage == LocaleManager.Language.ARABIC.code) (-6).dp else 0.dp)
 
                             )
                         }

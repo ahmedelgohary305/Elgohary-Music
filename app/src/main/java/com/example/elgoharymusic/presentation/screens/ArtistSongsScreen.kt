@@ -3,7 +3,6 @@ package com.example.elgoharymusic.presentation.screens
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.presentation.utils.MediaDetailScreen
 import com.example.elgoharymusic.presentation.utils.MediaType
 import com.example.elgoharymusic.presentation.viewmodels.FavViewModel
@@ -19,7 +18,7 @@ fun ArtistSongsScreen(
     playlistViewModel: PlaylistViewModel,
     navigateToPlaylist: (Long) -> Unit,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onNavigateBack: () -> Unit,
     onNavigateToPlayer: () -> Unit,
     onNavigateToArtist: (Long) -> Unit,

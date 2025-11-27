@@ -61,7 +61,6 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.screens.NoRtl
 import com.example.elgoharymusic.presentation.viewmodels.FavViewModel
@@ -73,7 +72,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun BottomContent(
     songs: List<Song>,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     isSelectionMode: Boolean,
     musicViewModel: MusicViewModel,
     favViewModel: FavViewModel,
@@ -143,7 +142,7 @@ fun ExpandableBottomBar(
     isExpanded: Boolean,
     currentSong: Song?,
     isPlaying: Boolean,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     queueSongs: List<Song>,
     colorScheme: ColorScheme,
     context: Context,
@@ -230,7 +229,7 @@ fun ExpandableBottomBar(
 fun MiniPlayerContent(
     song: Song,
     isPlaying: Boolean,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     queueSongs: List<Song>,
     context: Context,
     onPlayPause: () -> Unit,
@@ -337,7 +336,7 @@ fun MiniPlayerContent(
 @Composable
 fun PlayerControlsRow(
     isPlaying: Boolean,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onPlayPause: () -> Unit,
     onSkipNext: () -> Unit,
     onSkipPrevious: () -> Unit,

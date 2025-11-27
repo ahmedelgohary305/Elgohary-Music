@@ -13,15 +13,11 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
-enum class AppLanguage {
-    ENGLISH,
-    ARABIC
-}
+
 
 data class AppPreferences(
     val sortOrder: SortOrder = SortOrder.TITLE_ASC,
     val isDarkTheme: Boolean = true,
-    val language: AppLanguage = AppLanguage.ENGLISH
 )
 @Singleton
 class AppPreferencesRepoImpl @Inject constructor(
@@ -61,22 +57,6 @@ class AppPreferencesRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getLanguage(): AppLanguage {
-        val preferences = context.dataStore.data.first()
-        val languageString = preferences[PreferencesKeys.LANGUAGE] ?: AppLanguage.ENGLISH.name
-        return try {
-            AppLanguage.valueOf(languageString)
-        } catch (e: IllegalArgumentException) {
-            AppLanguage.ENGLISH
-        }
-    }
-
-    override suspend fun setLanguage(language: AppLanguage) {
-        context.dataStore.edit { preferences ->
-            preferences[PreferencesKeys.LANGUAGE] = language.name
-        }
-    }
-
     override fun getPreferencesFlow(): Flow<AppPreferences> {
         return context.dataStore.data.map { preferences ->
             AppPreferences(
@@ -86,11 +66,6 @@ class AppPreferencesRepoImpl @Inject constructor(
                     SortOrder.TITLE_ASC
                 },
                 isDarkTheme = preferences[PreferencesKeys.IS_DARK_THEME] ?: false,
-                language = try {
-                    AppLanguage.valueOf(preferences[PreferencesKeys.LANGUAGE] ?: AppLanguage.ENGLISH.name)
-                } catch (e: IllegalArgumentException) {
-                    AppLanguage.ENGLISH
-                }
             )
         }
     }

@@ -12,7 +12,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
 
@@ -23,7 +22,7 @@ fun SearchResultsList(
     currentSong: Song?,
     musicViewModel: MusicViewModel,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onSongClick: (Song) -> Unit
 ) {
     val miniPlayerHeight = 88.dp

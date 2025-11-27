@@ -68,11 +68,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.elgoharymusic.R
-import com.example.elgoharymusic.data.repoImpl.AppLanguage
 import com.example.elgoharymusic.domain.models.Song
 import com.example.elgoharymusic.presentation.viewmodels.FavViewModel
 import com.example.elgoharymusic.presentation.viewmodels.MusicViewModel
 import com.example.elgoharymusic.presentation.utils.ComponentImage
+import com.example.elgoharymusic.presentation.utils.LocaleManager
 import com.example.elgoharymusic.presentation.utils.QueueBottomSheet
 import com.example.elgoharymusic.presentation.utils.TimeFormatter
 import com.example.elgoharymusic.presentation.utils.formatDuration
@@ -89,7 +89,7 @@ fun FullPlayerScreen(
     musicViewModel: MusicViewModel,
     favViewModel: FavViewModel,
     context: Context,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onBack: () -> Unit
 ) {
     val currentSong by musicViewModel.currentSong.collectAsStateWithLifecycle()
@@ -190,7 +190,7 @@ fun FullPlayerScreen(
 
                 SongInfo(song = song, colorScheme = colorScheme, currentLanguage = currentLanguage)
 
-               if (currentLanguage != AppLanguage.ARABIC)
+               if (currentLanguage != LocaleManager.Language.ARABIC.code)
                    Spacer(modifier = Modifier.height(20.dp))
                 else
                    Spacer(modifier = Modifier.height(12.dp))
@@ -400,7 +400,7 @@ private fun AnimatedBackground(
 private fun TopBar(
     favViewModel: FavViewModel,
     currentSong: Song,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onBack: () -> Unit,
     onQueueClick: () -> Unit,
     queueSongs: List<Song>,
@@ -514,7 +514,7 @@ private fun AlbumArtSection(
 @Composable
 private fun SongInfo(
     song: Song,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     colorScheme: ColorScheme
 ) {
     val headlineSmall = MaterialTheme.typography.headlineSmall.copy(
@@ -536,7 +536,7 @@ private fun SongInfo(
         modifier = Modifier.padding(horizontal = 16.dp)
     )
 
-    if (currentLanguage != AppLanguage.ARABIC) Spacer(modifier = Modifier.height(8.dp))
+    if (currentLanguage != LocaleManager.Language.ARABIC.code) Spacer(modifier = Modifier.height(8.dp))
 
     Text(
         text = song.artist,
@@ -554,7 +554,7 @@ private fun ProgressSection(
     songId: Long,
     currentPosition: Long,
     duration: Long,
-    currentLanguage: AppLanguage,
+    currentLanguage: String,
     onSeek: (Long) -> Unit,
     colorScheme: ColorScheme
 ) {
