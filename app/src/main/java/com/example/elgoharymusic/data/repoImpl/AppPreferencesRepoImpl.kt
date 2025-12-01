@@ -27,7 +27,6 @@ class AppPreferencesRepoImpl @Inject constructor(
     private object PreferencesKeys {
         val SORT_ORDER = stringPreferencesKey("sort_order")
         val IS_DARK_THEME = booleanPreferencesKey("is_dark_theme")
-        val LANGUAGE = stringPreferencesKey("language")
     }
 
     override suspend fun getSortOrder(): SortOrder {
